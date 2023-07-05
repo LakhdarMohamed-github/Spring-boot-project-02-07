@@ -1,5 +1,6 @@
 package com.spring.Crudproject.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,11 +10,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "_user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable = false)
+    @Column(nullable = false, name = "user_name")
     private String userName;
     @Column(unique = true, nullable = false)
     private String email;
@@ -22,5 +24,6 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "role_id")
+    @JsonIgnoreProperties("users")
     private Role role;
 }

@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -15,6 +16,10 @@ public class UserService {
 
     public List<User> ShowUsers(){
         return userRepository.findAll();
+    }
+
+    public Optional<User> ShowUser(User user){
+        return userRepository.findById(user.getId());
     }
 
 }

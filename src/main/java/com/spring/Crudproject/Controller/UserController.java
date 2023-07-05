@@ -21,4 +21,8 @@ public class UserController {
         return userService.ShowUsers();
     }
 
+    //@GetMapping("/user")
+    //public User getUser(User user){
+        //return userService.ShowUser()
+    //}
 }
