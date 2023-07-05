@@ -18,6 +18,10 @@ public class UserController {
 
     @GetMapping("/users")
     public List<User> getUsers(){
+        // List<User> l=userService.ShowUsers();
+        // for(User u : l){
+        //     System.out.println(u.getEmail());
+        // }
         return userService.ShowUsers();
     }
 
