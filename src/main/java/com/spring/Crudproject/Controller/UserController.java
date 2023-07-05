@@ -3,26 +3,31 @@ package com.spring.Crudproject.Controller;
 import com.spring.Crudproject.Model.User;
 import com.spring.Crudproject.Service.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/users")
+    @GetMapping("/")
     public List<User> getUsers(){
         return userService.ShowUsers();
     }
 
-    //@GetMapping("/user")
-    //public User getUser(User user){
-        //return userService.ShowUser()
-    //}
+    @GetMapping("/{id}")
+    public User getUser(@PathVariable Integer id){
+       return userService.ShowUser(id);
+    }
+
+    @PostMapping("/add")
+    public void AddUser(@RequestBody User user){
+
+         userService.SaveUser(user);
+    }
+
 }
