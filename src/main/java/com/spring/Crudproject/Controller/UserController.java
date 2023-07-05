@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @RequestMapping("/")
 public class UserController {
-
+    
     private final UserService userService;
 
     @GetMapping("/users")

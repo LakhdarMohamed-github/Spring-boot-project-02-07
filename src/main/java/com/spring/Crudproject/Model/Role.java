@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -17,6 +19,7 @@ public class Role {
     private Integer role_id;
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy ="role" ,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<User> users;
 }

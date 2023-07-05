@@ -1,5 +1,7 @@
 package com.spring.Crudproject.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +23,7 @@ public class User {
     private String password;
 
     @ManyToOne
-    // @JoinColumn(name = "role_id")
+    @JoinColumn(name = "role_id")
+    @JsonIgnoreProperties("users")
     private Role role;
 }
