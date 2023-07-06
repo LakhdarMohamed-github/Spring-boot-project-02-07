@@ -1,5 +1,6 @@
 package com.spring.Crudproject.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,8 +19,8 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer role_id;
     private String name;
-
     @OneToMany(mappedBy ="role" ,cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnore
     private List<User> users;
+
 }
