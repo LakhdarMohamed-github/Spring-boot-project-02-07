@@ -1,5 +1,6 @@
 package com.spring.Crudproject.Service;
 
+import com.spring.Crudproject.Model.Response;
 import com.spring.Crudproject.Model.User;
 import com.spring.Crudproject.Repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -15,12 +16,21 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public List<User> ShowUsers(){
-        return userRepository.findAll();
+    public Response ShowUsers(){
+        List<User> x=userRepository.findAll();
+
+        return x.isEmpty()? new Response<String>("No User is found!"):new Response<List<User>>(x);
     }
 
     public User ShowUser(Integer id){
-        return userRepository.findById(id).orElseThrow();
+        return userRepository.findById(id).orElseThrow(()-> {
+            try {
+                throw new Exception("No user found!");
+            } catch (Exception e) {
+                throw new RuntimeException("No user found!");
+            }
+        });
+        //return userRepository.findById(id).orElseThrow();
     }
 
     public void SaveUser(User user){
@@ -38,8 +48,21 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void UpdateUser(@RequestBody User user){
+    public void UpdateUser(User user, Integer id){
+
+        User use = userRepository.findById(id).get();
+        use.setUserName(user.getUserName());
+        use.setEmail(user.getEmail());
+        use.setPassword(user.getPassword());
+        use.setRole(user.getRole());
+
+        userRepository.save(use);
 
     }
 
+    public void Delete(Integer id) {
+
+        userRepository.deleteById(id);
+
+    }
 }
